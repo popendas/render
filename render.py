@@ -100,8 +100,7 @@ class Main():
     def __init__(self, layout: list):
 
         sg.theme('SystemDefault')
-        self._window = sg.Window(
-            TITLE, layout, finalize=True, return_keyboard_events=True)
+        self._window = sg.Window(TITLE, layout, finalize=True, return_keyboard_events=True, margins=(0,0))
         self._event: str
         self._values: dict
         self._hotkey: Optional[Callable[[], None]] = None
@@ -293,6 +292,7 @@ class Main():
 
 
 # レイアウト
+# 連打機能の要素
 right = [
     [sg.Text("トリガー", size=(8, 1), justification='c', pad=((3, 2), (2, 2))), sg.Text("対象", size=(8, 1), justification='c', pad=((25, 2), (2, 2)))],
     [sg.Button(INIT_VALUES[TRIGGER], size=(8, 4), key=TRIGGER, pad=((2, 13), (2, 2))), sg.Button(INIT_VALUES[TARGET], size=(8, 4), key=TARGET, pad=((10, 2), (2, 2)))],
@@ -300,6 +300,7 @@ right = [
     [sg.Text("開始まで", size=(8, 1), justification='c', pad=((3, 2), (2, 2))), sg.Text("間隔", size=(8, 1), justification='c', pad=((25, 2), (2, 2)))],
     [sg.Input(INIT_VALUES[DELAY], size=(9, 1), pad=((3, 3), (2, 2)), enable_events=True, key=DELAY), sg.Input(INIT_VALUES[INTERVAL], size=(9, 1), pad=((25, 2), (2, 2)), enable_events=True, key=INTERVAL)], ]
 
+# プリセットの要素
 preset_header = ["スイッチ", "対象", "開始まで", "間隔"]
 preset_list = [
     ["F8", "e", "3", "1"],
@@ -310,9 +311,12 @@ left = [
     [sg.Button("追加", key=ADD), sg.Button("削除", key=DELETE)]
 ]
 
+layout_main = [sg.Column(right, background_color="#000000", size=(175, 200), pad=(0, 0), justification='c')]
+# 追加するかもしれないプリセット機能のレイアウト
+# layout_main.append(sg.Column(left, background_color="#ff0000", size=(150, 200), pad=(0, 0)))
 layout = [
     [sg.Button(size=(0, 0), visible=False)],  # ボタンの枠けし
-    [sg.Column(right, background_color="#000000", size=(175, 250), pad=(0, 0), justification='c'), sg.Column(left, background_color="#ff0000", size=(175, 250), pad=(0, 0))]
+    layout_main
 ]
 
 main = Main(layout)
