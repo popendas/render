@@ -1,0 +1,2 @@
+python render.py
+pause
