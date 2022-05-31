@@ -313,7 +313,7 @@ left = [
 
 layout_main = [sg.Column(right, background_color="#000000", size=(175, 200), pad=(0, 0), justification='c')]
 # 追加するかもしれないプリセット機能のレイアウト
-# layout_main.append(sg.Column(left, background_color="#ff0000", size=(150, 200), pad=(0, 0)))
+layout_main.append(sg.Column(left, background_color="#ff0000", size=(150, 200), pad=(0, 0)))
 layout = [
     [sg.Button(size=(0, 0), visible=False)],  # ボタンの枠けし
     layout_main
